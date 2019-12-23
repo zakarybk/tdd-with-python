@@ -45,7 +45,8 @@ class ListAndItemModelsTest(TestCase):
 class ListViewTest(TestCase):
 
 	def test_uses_list_template(self):
-		response = self.client.get('/lists/the-only-list-in-the-world/')
+		list_ = List.objects.create()
+		response = self.client.get(f'/lists/{list_.id}/')
 		self.assertTemplateUsed(response, 'list.html')
 
 	def test_displays_only_items_for_that_list(self):
@@ -56,7 +57,7 @@ class ListViewTest(TestCase):
 		Item.objects.create(text='other itemey 1', list=other_list)
 		Item.objects.create(text='other itemey 2', list=other_list)
 
-		response.self.client.get(f'/lists/{correct_list.id}/')
+		response = self.client.get(f'/lists/{correct_list.id}/')
 
 		self.assertContains(response, 'itemey 1')
 		self.assertContains(response, 'itemey 2')
@@ -86,7 +87,7 @@ class NewItemTest(TestCase):
 		correct_list = List.objects.create()
 
 		self.client.post(
-			f'lists/{correct_list.id}/add_item',
+			f'/lists/{correct_list.id}/add_item',
 			data={'item_text': 'A new item for an existing list'}
 		)
 
