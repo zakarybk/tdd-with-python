@@ -6,6 +6,10 @@ EMPTY_ITEM_ERROR = "You can't have an empty list item"
 
 # For more complex forms see - https://django-crispy-forms.readthedocs.org/
 class ItemForm(forms.models.ModelForm):
+
+	def save(self, for_list):
+		self.instance.list = for_list
+		return super().save()
 	
 	class Meta:
 		model = Item
