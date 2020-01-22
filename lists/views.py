@@ -32,3 +32,6 @@ def add_item(request, list_id):
 	list_ = List.objects.get(id=list_id)
 	Item.objects.create(text=request.POST['text'], list=list_)
 	return redirect(f'/lists/{list_.id}/')
+
+def my_lists(request, email):
+	return render(request, 'my_lists.html')
