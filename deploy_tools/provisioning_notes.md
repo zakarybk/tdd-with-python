@@ -27,3 +27,8 @@ Assume we have a user account at /home/username
 ├── source
 ├── static
 └── virtualenv
+## Systemd service
+* see gunicorn-systemd.template.service
+* replace SITENAME with, e.g., staging.my-domain.com
+* set EMAIL=myemail@email.com
+* set EMAIL_PASSWORD=1234password

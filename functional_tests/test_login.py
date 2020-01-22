@@ -31,9 +31,7 @@ class LoginTest(FunctionalTest):
 		))
 
 		# She checks her email and finds a message
-		email = mail.outbox[0]
-		self.assertIn(test_email, email.to)
-		self.assertEqual(email.subject, SUBJECT)
+		body = self.wait_for_email(test_email, SUBJECT)
 
 		# It has a url link in it
 		self.assertIn('Use this link to log in', body)
